@@ -135,7 +135,7 @@ NuGetConfections.exe &lt;Action&gt; [&lt;Options&gt;]
 
 Actions:
 VerifyConsolidation - Scans the repository and verifies that all package versions have been consolidated. 
-Returns an exit code of 2, when multiple versions of the same package are referenced.
+Returns an exit code of 2, when multiple versions of the same package are referenced. The repository directory may be provided via command line, defaults to the current directory. Every packages.config file located in the repository directory is included in the verification.
 
 Examples:
 NuGetConfections.exe VerifyConsolidation
