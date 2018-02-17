@@ -70,12 +70,37 @@ namespace NuGetConfections.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Usage:
-        ///NuGetConfections.exe [&lt;RepositoryPath&gt;]
+        ///   Looks up a localized string similar to Unconsolidated package versions found..
+        /// </summary>
+        internal static string UnconsolidatedPackageVersionsFound {
+            get {
+                return ResourceManager.GetString("UnconsolidatedPackageVersionsFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unexpected Action.
+        /// </summary>
+        internal static string UnexpectedAction {
+            get {
+                return ResourceManager.GetString("UnexpectedAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NuGet Confections
+        ///Provides tools to validate and manage NuGet package references.
+        ///
+        ///Usage:
+        ///NuGetConfections.exe &lt;Action&gt; [&lt;Options&gt;]
+        ///
+        ///Actions:
+        ///VerifyConsolidation - Scans the repository and verifies that all package versions have been consolidated. 
+        ///Returns an exit code of 2, when multiple versions of the same package are referenced.
         ///
         ///Examples:
-        ///NuGetConfections.exe
-        ///NuGetConfections.exe C:\Repo.
+        ///NuGetConfections.exe VerifyConsolidation
+        ///NuGetConfections.exe VerifyConsolidation C:\RepoPath.
         /// </summary>
         internal static string Usage {
             get {

@@ -77,8 +77,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Action.cs" />
     <Compile Include="AssemblyDependencyInfo.cs" />
+    <Compile Include="CommandFactory.cs" />
+    <Compile Include="CommandOptions.cs" />
+    <Compile Include="ExitCodes.cs" />
+    <Compile Include="INuGetConfectionCommand.cs" />
     <Compile Include="PackageReferenceInfo.cs" />
+    <Compile Include="PackageReferenceInfoForAssembly.cs" />
     <Compile Include="PackageReferenceManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,6 +94,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="RepositoryDependencyInfo.cs" />
+    <Compile Include="VerifyPackageConsolidationCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

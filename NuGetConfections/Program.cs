@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using NuGetConfections.Properties;
 
 namespace NuGetConfections
@@ -12,43 +9,24 @@ namespace NuGetConfections
         {
             try
             {
-                string repoDirectoryPath = GetRepositoryDirectoryPath(args);
-                RepositoryDependencyInfo repositoryDependencyInfo = new RepositoryDependencyInfo(repoDirectoryPath);
-                PackageReferenceManager packageReferenceManager = repositoryDependencyInfo.GetPackageReferences();
+                CommandOptions commandOptions = new CommandOptions(args);
 
-                IEnumerable<string> packagesWithMultipleVersions = packageReferenceManager.GetPackagesWithMultipleVersions();
-                if (packagesWithMultipleVersions.Any())
+                INuGetConfectionCommand command = CommandFactory.GetCommand(commandOptions);
+
+                if(!command.TryRun(out string errorMessage))
                 {
-                    foreach (string packageIdentity in packagesWithMultipleVersions)
-                    {
-                        foreach (PackageReferenceInfo packageReferenceInfo in packageReferenceManager.GetPackageReferences(packageIdentity))
-                        {
-                            Console.WriteLine(packageReferenceInfo);
-                        }
-                    }
-                    return 1;
-                }
-                return 0;
+                    Console.Error.WriteLine(errorMessage);
+                    return (int)ExitCode.UnconsolidatedPackageFound;
+                }                   
+                
+                return (int)ExitCode.Success;
             }
             catch(Exception ex)
             {
                 Console.Error.WriteLine(ex.Message);
                 PrintUsage();
-                return 2;
+                return (int)ExitCode.InvalidArguments;
             }
-        }
-
-        private static string GetRepositoryDirectoryPath(string[] args)
-        {
-            if(args.Length == 0)
-            {
-                return Environment.CurrentDirectory;
-            }
-            else if(Directory.Exists(args[0]))
-            {
-                return args[0];
-            }
-            throw new ArgumentException(Resources.InvalidArguments);
         }
 
         private static void PrintUsage()

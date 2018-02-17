@@ -120,12 +120,25 @@
   <data name="InvalidArguments" xml:space="preserve">
     <value>Invalid Arguments</value>
   </data>
+  <data name="UnconsolidatedPackageVersionsFound" xml:space="preserve">
+    <value>Unconsolidated package versions found.</value>
+  </data>
+  <data name="UnexpectedAction" xml:space="preserve">
+    <value>Unexpected Action</value>
+  </data>
   <data name="Usage" xml:space="preserve">
-    <value>Usage:
-NuGetConfections.exe [&lt;RepositoryPath&gt;]
+    <value>NuGet Confections
+Provides tools to validate and manage NuGet package references.
+
+Usage:
+NuGetConfections.exe &lt;Action&gt; [&lt;Options&gt;]
+
+Actions:
+VerifyConsolidation - Scans the repository and verifies that all package versions have been consolidated. 
+Returns an exit code of 2, when multiple versions of the same package are referenced.
 
 Examples:
-NuGetConfections.exe
-NuGetConfections.exe C:\Repo</value>
+NuGetConfections.exe VerifyConsolidation
+NuGetConfections.exe VerifyConsolidation C:\RepoPath</value>
   </data>
 </root>
