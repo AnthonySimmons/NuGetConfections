@@ -136,6 +136,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="keypair.snk" />
+    <None Include="NuGetConfections.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

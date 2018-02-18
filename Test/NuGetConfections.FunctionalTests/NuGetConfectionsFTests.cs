@@ -84,7 +84,7 @@ $@"NUnit.3.7.1, is referenced from: '{_testDirectory}\TestData\Unconsolidated\As
             
 
             Assert.AreEqual("", stdErr);
-            Assert.AreEqual("", stdOut);
+            Assert.AreEqual(Resources.AllPackagesConsolidated + Environment.NewLine, stdOut);
         }
 
         private int ExecuteNuGetConfections(string args, string cwd, out string stdError, out string stdOutput)

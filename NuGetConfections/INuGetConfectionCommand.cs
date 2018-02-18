@@ -4,6 +4,6 @@ namespace NuGetConfections
 {
     internal interface INuGetConfectionCommand
     {
-        bool TryRun(out string errorMessage);
+        bool TryRun(out string outputMessage);
     }
 }

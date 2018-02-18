@@ -61,6 +61,15 @@ namespace NuGetConfections.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All packages consolidated..
+        /// </summary>
+        internal static string AllPackagesConsolidated {
+            get {
+                return ResourceManager.GetString("AllPackagesConsolidated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid Arguments.
         /// </summary>
         internal static string InvalidArguments {

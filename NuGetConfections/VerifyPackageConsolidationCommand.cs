@@ -17,22 +17,22 @@ namespace NuGetConfections
             _directoryPath = GetRepositoryDirectoryPath(commandOptions.Options);
         }
 
-        public bool TryRun(out string errorString)
+        public bool TryRun(out string outputMessage)
         {
             bool success = true;
-            errorString = null;
+            outputMessage = Resources.AllPackagesConsolidated;
             RepositoryDependencyInfo repositoryDependencyInfo = new RepositoryDependencyInfo(_directoryPath);
             PackageReferenceManager packageReferenceManager = repositoryDependencyInfo.GetPackageReferences();
 
             IEnumerable<string> packagesWithMultipleVersions = packageReferenceManager.GetPackagesWithMultipleVersions();
             if (packagesWithMultipleVersions.Any())
             {
-                errorString = Resources.UnconsolidatedPackageVersionsFound + Environment.NewLine;
+                outputMessage = Resources.UnconsolidatedPackageVersionsFound + Environment.NewLine;
                 foreach (string packageIdentity in packagesWithMultipleVersions)
                 {
                     foreach (PackageReferenceInfo packageReferenceInfo in packageReferenceManager.GetPackageReferences(packageIdentity))
                     {
-                        errorString += $"{packageReferenceInfo}{Environment.NewLine}";
+                        outputMessage += $"{packageReferenceInfo}{Environment.NewLine}";
                     }
                 }
                 success = false;

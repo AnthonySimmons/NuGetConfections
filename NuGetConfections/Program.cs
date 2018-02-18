@@ -13,11 +13,15 @@ namespace NuGetConfections
 
                 INuGetConfectionCommand command = CommandFactory.GetCommand(commandOptions);
 
-                if(!command.TryRun(out string errorMessage))
+                if(!command.TryRun(out string outputMessage))
                 {
-                    Console.Error.WriteLine(errorMessage);
+                    Console.Error.WriteLine(outputMessage);
                     return (int)ExitCode.UnconsolidatedPackageFound;
                 }                   
+                else
+                {
+                    Console.WriteLine(outputMessage);
+                }
                 
                 return (int)ExitCode.Success;
             }
