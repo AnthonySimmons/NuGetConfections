@@ -38,12 +38,10 @@ NUnit.3.7.1, is referenced from: 'TestData\Unconsolidated\Assembly5\packages.con
         [Test]
         public void Unconsolidated_WithoutRepoArgTest()
         {
-            const string expectedStdErr = @"Unconsolidated package versions found.
-NUnit.3.9.0, is referenced from: 'C:\workspace\NuGet-Confections\NuGetConfections\Test\NuGetConfections.FunctionalTests\bin\x86\Debug\TestData\Unconsolidated\Assembly3\packages.config'
-NUnit.3.9.0, is referenced from: 'C:\workspace\NuGet-Confections\NuGetConfections\Test\NuGetConfections.FunctionalTests\bin\x86\Debug\TestData\Unconsolidated\Assembly4\packages.config'
-NUnit.3.7.1, is referenced from: 'C:\workspace\NuGet-Confections\NuGetConfections\Test\NuGetConfections.FunctionalTests\bin\x86\Debug\TestData\Unconsolidated\Assembly5\packages.config'
-
-";
+            string expectedStdErr = $@"Unconsolidated package versions found.{Environment.NewLine}" +
+$@"NUnit.3.9.0, is referenced from: '{_testDirectory}\TestData\Unconsolidated\Assembly3\packages.config'{Environment.NewLine}" +
+$@"NUnit.3.9.0, is referenced from: '{_testDirectory}\TestData\Unconsolidated\Assembly4\packages.config'{Environment.NewLine}" +
+$@"NUnit.3.7.1, is referenced from: '{_testDirectory}\TestData\Unconsolidated\Assembly5\packages.config'{Environment.NewLine}{Environment.NewLine}";
 
             int exitCode = ExecuteNuGetConfections(Action.VerifyConsolidation.ToString(), _uncosolidatedTestDataPath, out string stdErr, out string stdOut);
             AssertUnconsolidatedResult(exitCode, stdErr, stdOut, expectedStdErr);
