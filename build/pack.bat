@@ -8,7 +8,7 @@ IF "%1" == "" (
 )
 SET VERSION=%1
 
-nuget.exe pack NuGetConfections\NuGetConfections.csproj -Properties Configuration=Release -Version %VERSION%
+nuget.exe pack NuGetConfections\NuGetConfections.csproj -Properties Configuration=Release -Properties Platform=x86 -Version %VERSION%
 
 SET RESULT=%ERRORLEVEL%
 CD %PREV_DIR%

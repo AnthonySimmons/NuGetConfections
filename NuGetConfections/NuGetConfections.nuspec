@@ -11,9 +11,9 @@
     <licenseUrl>https://raw.githubusercontent.com/AnthonySimmons/NuGetConfections/master/LICENSE</licenseUrl>
     <description>Extends the NuGet.Client API to provide some additional tools to manage package dependencies.</description>
     <copyright>Copyright ©  2018</copyright>
-    <dependencies>
-      <dependency id="NuGet.Client" version="4.2.0" />
-    </dependencies>
     <tags>NuGet CommandLine Package</tags>
   </metadata>
+  <files>
+    <file src="bin\x86\Release\*.dll" target="lib\net461" />
+  </files>
 </package>
