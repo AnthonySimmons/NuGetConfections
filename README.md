@@ -1,6 +1,6 @@
 # NuGet Confections
 
-Extends the [NuGet.Client API](https://github.com/NuGet/NuGet.Client) to provide some additional tools to manage package dependencies.
+Provides some tools to manage NuGet package dependencies.
 
 # Availability
 This tool is available as a NuGet package, and can be downloaded at [NuGet.org](https://www.nuget.org/packages/NuGetConfections/).
