@@ -2,9 +2,15 @@
 
 Extends the [NuGet.Client API](https://github.com/NuGet/NuGet.Client) to provide some additional tools to manage package dependencies.
 
+# Availability
+This tool is available as a NuGet package, and can be downloaded at [NuGet.org](https://www.nuget.org/packages/NuGetConfections/).
+
+
 ## Package Consolidation
 This tool provides the ability to verify that referenced packages use the same versions across an entire repository, via command line.
 Every packages.config file within the repository directory is included in the verification.
+
+## Usage
 
 ```
 NuGet Confections
