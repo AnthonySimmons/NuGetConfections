@@ -1,6 +1,5 @@
 ﻿
 
-using NuGet.Packaging;
 using NuGetConfections;
 using System.Collections.Generic;
 
@@ -10,17 +9,17 @@ internal class PackageReferenceManager
     
     public void Add(PackageReference packageReference, string configFileName)
     {
-        if (_packageReferenceInfosById.ContainsKey(packageReference.PackageIdentity.Id))
+        if (_packageReferenceInfosById.ContainsKey(packageReference.Id))
         {
-            _packageReferenceInfosById[packageReference.PackageIdentity.Id].Add(packageReference, configFileName);
+            _packageReferenceInfosById[packageReference.Id].Add(packageReference, configFileName);
         }
         else
         {
-            _packageReferenceInfosById[packageReference.PackageIdentity.Id] = new PackageReferenceInfoForRepository(packageReference, configFileName);
+            _packageReferenceInfosById[packageReference.Id] = new PackageReferenceInfoForRepository(packageReference, configFileName);
         }
     }
 
-    public IList<PackageReferenceInfo> GetPackageReferences(string packageIdentity)
+    public IList<PackageReference> GetPackageReferences(string packageIdentity)
     {
         return _packageReferenceInfosById[packageIdentity].PackageReferenceInfos;
     }

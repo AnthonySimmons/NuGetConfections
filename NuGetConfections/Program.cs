@@ -1,5 +1,6 @@
 ﻿using System;
 using NuGetConfections.Properties;
+using NuGetConfections.Commands;
 
 namespace NuGetConfections
 {

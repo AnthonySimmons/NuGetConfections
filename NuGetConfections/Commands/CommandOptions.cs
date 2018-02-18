@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NuGetConfections.Properties;
 
-namespace NuGetConfections
+namespace NuGetConfections.Commands
 {
     internal class CommandOptions
     {

@@ -27,9 +27,9 @@ namespace NuGetConfections.FunctionalTests
             int exitCode = ExecuteNuGetConfections($"{Action.VerifyConsolidation} TestData\\Unconsolidated", _testDirectory, out string stdErr, out string stdOut);
 
             const string expectedStdErr = @"Unconsolidated package versions found.
-NUnit.3.9.0, is referenced from: 'TestData\Unconsolidated\Assembly3\packages.config'
-NUnit.3.9.0, is referenced from: 'TestData\Unconsolidated\Assembly4\packages.config'
-NUnit.3.7.1, is referenced from: 'TestData\Unconsolidated\Assembly5\packages.config'
+NUnit 3.9.0, is referenced from: 'TestData\Unconsolidated\Assembly3\packages.config'
+NUnit 3.9.0, is referenced from: 'TestData\Unconsolidated\Assembly4\packages.config'
+NUnit 3.7.1, is referenced from: 'TestData\Unconsolidated\Assembly5\packages.config'
 
 ";
             AssertUnconsolidatedResult(exitCode, stdErr, stdOut, expectedStdErr);
@@ -39,9 +39,9 @@ NUnit.3.7.1, is referenced from: 'TestData\Unconsolidated\Assembly5\packages.con
         public void Unconsolidated_WithoutRepoArgTest()
         {
             string expectedStdErr = $@"Unconsolidated package versions found.{Environment.NewLine}" +
-$@"NUnit.3.9.0, is referenced from: '{_testDirectory}\TestData\Unconsolidated\Assembly3\packages.config'{Environment.NewLine}" +
-$@"NUnit.3.9.0, is referenced from: '{_testDirectory}\TestData\Unconsolidated\Assembly4\packages.config'{Environment.NewLine}" +
-$@"NUnit.3.7.1, is referenced from: '{_testDirectory}\TestData\Unconsolidated\Assembly5\packages.config'{Environment.NewLine}{Environment.NewLine}";
+$@"NUnit 3.9.0, is referenced from: '{_testDirectory}\TestData\Unconsolidated\Assembly3\packages.config'{Environment.NewLine}" +
+$@"NUnit 3.9.0, is referenced from: '{_testDirectory}\TestData\Unconsolidated\Assembly4\packages.config'{Environment.NewLine}" +
+$@"NUnit 3.7.1, is referenced from: '{_testDirectory}\TestData\Unconsolidated\Assembly5\packages.config'{Environment.NewLine}{Environment.NewLine}";
 
             int exitCode = ExecuteNuGetConfections(Action.VerifyConsolidation.ToString(), _uncosolidatedTestDataPath, out string stdErr, out string stdOut);
             AssertUnconsolidatedResult(exitCode, stdErr, stdOut, expectedStdErr);

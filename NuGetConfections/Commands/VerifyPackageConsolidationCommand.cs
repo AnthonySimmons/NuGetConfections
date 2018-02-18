@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using NuGetConfections.Properties;
 
-namespace NuGetConfections
+namespace NuGetConfections.Commands
 {
     internal class VerifyPackageConsolidationCommand : INuGetConfectionCommand
     {
@@ -30,7 +30,7 @@ namespace NuGetConfections
                 outputMessage = Resources.UnconsolidatedPackageVersionsFound + Environment.NewLine;
                 foreach (string packageIdentity in packagesWithMultipleVersions)
                 {
-                    foreach (PackageReferenceInfo packageReferenceInfo in packageReferenceManager.GetPackageReferences(packageIdentity))
+                    foreach (PackageReference packageReferenceInfo in packageReferenceManager.GetPackageReferences(packageIdentity))
                     {
                         outputMessage += $"{packageReferenceInfo}{Environment.NewLine}";
                     }

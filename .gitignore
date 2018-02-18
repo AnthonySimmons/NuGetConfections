@@ -4,3 +4,4 @@
 packages/*
 *.user
 TestResult.xml
+.axoCover/*

@@ -1,7 +1,5 @@
 ﻿
-using NuGet.Packaging;
 using System.Collections.Generic;
-using System.IO;
 
 namespace NuGetConfections
 {
@@ -16,11 +14,9 @@ namespace NuGetConfections
 
         public IEnumerable<PackageReference> GetPackageReferences()
         {
-            using (Stream configFileStream = File.Open(ConfigFileName, FileMode.Open))
-            {
-                PackagesConfigReader packagesConfigReader = new PackagesConfigReader(configFileStream);
-                return packagesConfigReader.GetPackages();
-            }
+            PackageConfig packageConfig = new PackageConfig(ConfigFileName);
+            packageConfig.Load();
+            return packageConfig.PackageReferences;
         }
     }
 }

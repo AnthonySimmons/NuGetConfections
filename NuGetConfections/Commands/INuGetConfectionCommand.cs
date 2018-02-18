@@ -1,6 +1,6 @@
 ﻿
 
-namespace NuGetConfections
+namespace NuGetConfections.Commands
 {
     internal interface INuGetConfectionCommand
     {

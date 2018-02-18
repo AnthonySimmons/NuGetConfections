@@ -1,14 +1,13 @@
-﻿using NuGet.Packaging;
-using NuGet.Versioning;
+﻿
 using System.Collections.Generic;
 
 namespace NuGetConfections
 {
     internal class PackageReferenceInfoForRepository
     {
-        public List<PackageReferenceInfo> PackageReferenceInfos { get; } = new List<PackageReferenceInfo>();
+        public List<PackageReference> PackageReferenceInfos { get; } = new List<PackageReference>();
 
-        private readonly HashSet<NuGetVersion> _packageVersions = new HashSet<NuGetVersion>();
+        private readonly HashSet<string> _packageVersions = new HashSet<string>();
 
         public bool HasMultipleVersions { get; private set; }
 
@@ -19,7 +18,7 @@ namespace NuGetConfections
 
         public void Add(PackageReference packageReference, string configFileName)
         {
-            if (!_packageVersions.Contains(packageReference.PackageIdentity.Version))
+            if (!_packageVersions.Contains(packageReference.Version))
             {
                 HasMultipleVersions = true;
             }
@@ -28,9 +27,9 @@ namespace NuGetConfections
 
         private void AddInternal(PackageReference packageReference, string configFileName)
         {
-            PackageReferenceInfo packageReferenceInfo = new PackageReferenceInfo(packageReference, configFileName);
+            PackageReference packageReferenceInfo = new PackageReference(configFileName, packageReference.Id, packageReference.Version);
             PackageReferenceInfos.Add(packageReferenceInfo);
-            _packageVersions.Add(packageReferenceInfo.PackageIdentity.Version);
+            _packageVersions.Add(packageReferenceInfo.Version);
         }
     }
 }
