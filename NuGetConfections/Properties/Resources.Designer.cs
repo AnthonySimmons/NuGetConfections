@@ -88,6 +88,15 @@ namespace NuGetConfections.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Package &apos;{0}&apos; is ignored and has multiple versions..
+        /// </summary>
+        internal static string Package_0_IsIgnoredAndHasMultipleVersions {
+            get {
+                return ResourceManager.GetString("Package_0_IsIgnoredAndHasMultipleVersions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unconsolidated package versions found..
         /// </summary>
         internal static string UnconsolidatedPackageVersionsFound {

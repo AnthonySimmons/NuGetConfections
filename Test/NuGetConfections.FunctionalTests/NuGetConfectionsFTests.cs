@@ -27,7 +27,7 @@ namespace NuGetConfections.FunctionalTests
         [Test]
         public void Unconsolidated_WithRepoArgTest()
         {
-            int exitCode = ExecuteNuGetConfections($"{Action.VerifyConsolidation} TestData\\Unconsolidated", _testDirectory, out string stdErr, out string stdOut);
+            int exitCode = ExecuteNuGetConfections($"{Action.VerifyConsolidation} Repository=TestData\\Unconsolidated", _testDirectory, out string stdErr, out string stdOut);
 
             const string expectedStdErr = @"Unconsolidated package versions found.
 NUnit 3.9.0, is referenced from: 'TestData\Unconsolidated\Assembly3\packages.config'
@@ -35,7 +35,29 @@ NUnit 3.9.0, is referenced from: 'TestData\Unconsolidated\Assembly4\packages.con
 NUnit 3.7.1, is referenced from: 'TestData\Unconsolidated\Assembly5\packages.config'
 
 ";
-            AssertUnconsolidatedResult(exitCode, stdErr, stdOut, expectedStdErr);
+            AssertUnconsolidatedResult(exitCode, stdErr, stdOut, expectedStdErr, string.Empty);
+        }
+
+        [Test]
+        public void Unconsolidated_WithRepoArgAndIgnoredPackagesTest()
+        {
+            const string ignored = "NUnit";
+            int exitCode = ExecuteNuGetConfections($"{Action.VerifyConsolidation} Repository=TestData\\Unconsolidated Ignored=\"{ignored}\"", _testDirectory, out string stdErr, out string stdOut);
+
+            string expectedStdOut = string.Format(Resources.Package_0_IsIgnoredAndHasMultipleVersions, ignored) + Environment.NewLine;
+
+            AssertConsolidatedWithIgnoredResult(exitCode, stdErr, stdOut, expectedStdOut);
+        }
+
+        [Test]
+        public void Unconsolidated_WithoutRepoArgAndIgnoredPackagesTest()
+        {
+            const string ignored = "NUnit";
+            int exitCode = ExecuteNuGetConfections($"{Action.VerifyConsolidation} Ignored=\"{ignored}\"", _testDirectory, out string stdErr, out string stdOut);
+
+            string expectedStdOut = string.Format(Resources.Package_0_IsIgnoredAndHasMultipleVersions, ignored) + Environment.NewLine;
+
+            AssertConsolidatedWithIgnoredResult(exitCode, stdErr, stdOut, expectedStdOut);
         }
 
         [Test]
@@ -47,20 +69,13 @@ $@"NUnit 3.9.0, is referenced from: '{_testDirectory}\TestData\Unconsolidated\As
 $@"NUnit 3.7.1, is referenced from: '{_testDirectory}\TestData\Unconsolidated\Assembly5\packages.config'{Environment.NewLine}{Environment.NewLine}";
 
             int exitCode = ExecuteNuGetConfections(Action.VerifyConsolidation.ToString(), _uncosolidatedTestDataPath, out string stdErr, out string stdOut);
-            AssertUnconsolidatedResult(exitCode, stdErr, stdOut, expectedStdErr);
-        }
-
-        private void AssertUnconsolidatedResult(int exitCode, string stdErr, string stdOut, string expectedStdErr)
-        { 
-            Assert.AreEqual((int)ExitCode.UnconsolidatedPackageFound, exitCode);
-            Assert.AreEqual(expectedStdErr, stdErr);
-            Assert.AreEqual("", stdOut);
+            AssertUnconsolidatedResult(exitCode, stdErr, stdOut, expectedStdErr, string.Empty);
         }
 
         [Test]
         public void Consolidated_WithRepoArgsTest()
         {
-            int exitCode = ExecuteNuGetConfections($"{Action.VerifyConsolidation} TestData\\Consolidated", _testDirectory, out string stdErr, out string stdOut);
+            int exitCode = ExecuteNuGetConfections($"{Action.VerifyConsolidation} Repository=TestData\\Consolidated", _testDirectory, out string stdErr, out string stdOut);
             AssertConsolidatedResult(exitCode, stdErr, stdOut);
         }
 
@@ -72,12 +87,29 @@ $@"NUnit 3.7.1, is referenced from: '{_testDirectory}\TestData\Unconsolidated\As
         }
 
         [Test]
+        public void Consolidated_WithRepoAndIgnoredArgsTest()
+        {
+            const string ignored = "NUnit,AutoFixture";
+            int exitCode = ExecuteNuGetConfections($"{Action.VerifyConsolidation} Repository=TestData\\Consolidated Ignored=\"{ignored}\"", _testDirectory, out string stdErr, out string stdOut);
+            AssertConsolidatedResult(exitCode, stdErr, stdOut);
+        }
+
+        [Test]
+        public void Consolidated_WithoutRepoAndIgnoredArgsTest()
+        {
+            const string ignored = "NUnit";
+            int exitCode = ExecuteNuGetConfections($"{Action.VerifyConsolidation} Ignored=\"{ignored}\"", _consolidatedTestDataPath, out string stdErr, out string stdOut);
+            AssertConsolidatedResult(exitCode, stdErr, stdOut);
+        }
+
+
+        [Test]
         public void PrintUsageTest()
         {
-            int exitCode = ExecuteNuGetConfections("", _consolidatedTestDataPath, out string stdErr, out string stdOut);
+            int exitCode = ExecuteNuGetConfections(string.Empty, _consolidatedTestDataPath, out string stdErr, out string stdOut);
 
             Assert.AreEqual((int)ExitCode.PrintUsage, exitCode);
-            Assert.AreEqual("", stdErr);
+            Assert.AreEqual(string.Empty, stdErr);
             Assert.AreEqual(Resources.Usage + Environment.NewLine, stdOut);
         }
 
@@ -86,17 +118,31 @@ $@"NUnit 3.7.1, is referenced from: '{_testDirectory}\TestData\Unconsolidated\As
         {
             int exitCode = ExecuteNuGetConfections(Action.VerifyConsolidation.ToString(), _noPackageReferencesPath, out string stdErr, out string stdOut);
             Assert.AreEqual((int)ExitCode.Success, exitCode);
-            Assert.AreEqual("", stdErr);
+            Assert.AreEqual(string.Empty, stdErr);
             Assert.AreEqual(Resources.NoPackageReferencesFound + Environment.NewLine, stdOut);
+        }
+        
+        private void AssertUnconsolidatedResult(int exitCode, string stdErr, string stdOut, string expectedStdErr, string expectedStdOut)
+        {
+            Assert.AreEqual((int)ExitCode.UnconsolidatedPackageFound, exitCode);
+            Assert.AreEqual(expectedStdErr, stdErr);
+            Assert.AreEqual(expectedStdOut, stdOut);
         }
 
         private void AssertConsolidatedResult(int exitCode, string stdErr, string stdOut)
         { 
             Assert.AreEqual((int)ExitCode.Success, exitCode);
             
-
-            Assert.AreEqual("", stdErr);
+            Assert.AreEqual(string.Empty, stdErr);
             Assert.AreEqual(Resources.AllPackagesConsolidated + Environment.NewLine, stdOut);
+        }
+
+        private void AssertConsolidatedWithIgnoredResult(int exitCode, string stdErr, string stdOut, string expectedStdOut)
+        {
+            Assert.AreEqual((int)ExitCode.Success, exitCode);
+
+            Assert.AreEqual(string.Empty, stdErr);
+            Assert.AreEqual(expectedStdOut, stdOut);
         }
 
         private int ExecuteNuGetConfections(string args, string cwd, out string stdError, out string stdOutput)
