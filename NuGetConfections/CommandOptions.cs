@@ -11,6 +11,11 @@ namespace NuGetConfections
     {
         public CommandOptions(string[] args)
         {
+            if(args.Length == 0)
+            {
+                throw new PrintUsageException();
+            }
+
             try
             {
                 Action = (Action)Enum.Parse(typeof(Action), args[0], ignoreCase: true);

@@ -21,6 +21,11 @@ namespace NuGetConfections
                 
                 return (int)ExitCode.Success;
             }
+            catch(PrintUsageException)
+            {
+                PrintUsage();
+                return (int)ExitCode.PrintUsage;
+            }
             catch(Exception ex)
             {
                 Console.Error.WriteLine(ex.Message);

@@ -6,8 +6,10 @@ namespace NuGetConfections
     {
         Success = 0,
 
-        InvalidArguments = 1,
+        PrintUsage = 1,
 
-        UnconsolidatedPackageFound = 2,
+        InvalidArguments = 2,
+
+        UnconsolidatedPackageFound = 3,
     }
 }
