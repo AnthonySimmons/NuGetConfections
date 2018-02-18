@@ -10,7 +10,7 @@ namespace NuGetConfections.FunctionalTests
     [TestFixture]
     public class NuGetConfectionsFTests
     {
-        private string _testDirectory, _uncosolidatedTestDataPath, _consolidatedTestDataPath;
+        private string _testDirectory, _uncosolidatedTestDataPath, _consolidatedTestDataPath, _nugetConfectionsPath;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
@@ -18,6 +18,7 @@ namespace NuGetConfections.FunctionalTests
             _testDirectory = GetTestDirectory();
             _uncosolidatedTestDataPath = Path.Combine(_testDirectory, "TestData\\Unconsolidated");
             _consolidatedTestDataPath = Path.Combine(_testDirectory, "TestData\\Consolidated");
+            _nugetConfectionsPath = Path.Combine(_testDirectory, "NuGetConfections.exe");
         }
 
         [Test]
@@ -90,7 +91,7 @@ NUnit.3.7.1, is referenced from: 'C:\workspace\NuGet-Confections\NuGetConfection
 
         private int ExecuteNuGetConfections(string args, string cwd, out string stdError, out string stdOutput)
         {
-            ProcessStartInfo procStartInfo = new ProcessStartInfo("NuGetConfections.exe", args)
+            ProcessStartInfo procStartInfo = new ProcessStartInfo(_nugetConfectionsPath, args)
             {
                 RedirectStandardError = true,
                 RedirectStandardOutput = true,
