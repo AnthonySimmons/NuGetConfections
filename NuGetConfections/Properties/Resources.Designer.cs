@@ -79,6 +79,15 @@ namespace NuGetConfections.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No package references found..
+        /// </summary>
+        internal static string NoPackageReferencesFound {
+            get {
+                return ResourceManager.GetString("NoPackageReferencesFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unconsolidated package versions found..
         /// </summary>
         internal static string UnconsolidatedPackageVersionsFound {

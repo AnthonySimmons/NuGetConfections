@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using NuGetConfections.DependencyInfo;
+using NuGetConfections.PackageReferences;
 using NuGetConfections.Properties;
 
 namespace NuGetConfections.Commands
@@ -24,18 +26,25 @@ namespace NuGetConfections.Commands
             RepositoryDependencyInfo repositoryDependencyInfo = new RepositoryDependencyInfo(_directoryPath);
             PackageReferenceManager packageReferenceManager = repositoryDependencyInfo.GetPackageReferences();
 
-            IEnumerable<string> packagesWithMultipleVersions = packageReferenceManager.GetPackagesWithMultipleVersions();
-            if (packagesWithMultipleVersions.Any())
+            if (!packageReferenceManager.HasPackageReferences())
             {
-                outputMessage = Resources.UnconsolidatedPackageVersionsFound + Environment.NewLine;
-                foreach (string packageIdentity in packagesWithMultipleVersions)
+                outputMessage = Resources.NoPackageReferencesFound;
+            }
+            else
+            {
+                IEnumerable<string> packagesWithMultipleVersions = packageReferenceManager.GetPackagesWithMultipleVersions();
+                if (packagesWithMultipleVersions.Any())
                 {
-                    foreach (PackageReference packageReferenceInfo in packageReferenceManager.GetPackageReferences(packageIdentity))
+                    outputMessage = Resources.UnconsolidatedPackageVersionsFound + Environment.NewLine;
+                    foreach (string packageIdentity in packagesWithMultipleVersions)
                     {
-                        outputMessage += $"{packageReferenceInfo}{Environment.NewLine}";
+                        foreach (PackageReference packageReferenceInfo in packageReferenceManager.GetPackageReferences(packageIdentity))
+                        {
+                            outputMessage += $"{packageReferenceInfo}{Environment.NewLine}";
+                        }
                     }
+                    success = false;
                 }
-                success = false;
             }
             return success;
         }

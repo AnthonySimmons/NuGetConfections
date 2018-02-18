@@ -1,7 +1,8 @@
 ﻿
+using NuGetConfections.PackageReferences;
 using System.Collections.Generic;
 
-namespace NuGetConfections
+namespace NuGetConfections.DependencyInfo
 {
     internal class AssemblyDependencyInfo
     {

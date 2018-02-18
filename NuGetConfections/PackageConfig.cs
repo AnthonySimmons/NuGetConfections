@@ -1,5 +1,6 @@
 ﻿
 
+using NuGetConfections.PackageReferences;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;

@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using Action = NuGetConfections.Enums.Action;
 
 namespace NuGetConfections.Commands
 {

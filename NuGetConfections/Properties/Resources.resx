@@ -123,6 +123,9 @@
   <data name="InvalidArguments" xml:space="preserve">
     <value>Invalid Arguments</value>
   </data>
+  <data name="NoPackageReferencesFound" xml:space="preserve">
+    <value>No package references found.</value>
+  </data>
   <data name="UnconsolidatedPackageVersionsFound" xml:space="preserve">
     <value>Unconsolidated package versions found.</value>
   </data>

@@ -1,7 +1,7 @@
 ﻿
 using System.Collections.Generic;
 
-namespace NuGetConfections
+namespace NuGetConfections.PackageReferences
 {
     internal class PackageReferenceInfoForRepository
     {

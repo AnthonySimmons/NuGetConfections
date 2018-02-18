@@ -1,6 +1,7 @@
 ﻿using System;
 using NuGetConfections.Properties;
 using NuGetConfections.Commands;
+using NuGetConfections.Enums;
 
 namespace NuGetConfections
 {

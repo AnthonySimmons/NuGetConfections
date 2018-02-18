@@ -1,6 +1,6 @@
 ﻿
 
-namespace NuGetConfections
+namespace NuGetConfections.Enums
 {
     public enum ExitCode
     {

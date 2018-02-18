@@ -1,6 +1,6 @@
 ﻿
 
-namespace NuGetConfections
+namespace NuGetConfections.PackageReferences
 {
     internal class PackageReference
     {

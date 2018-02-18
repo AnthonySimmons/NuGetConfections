@@ -4,13 +4,15 @@ using System.Diagnostics;
 using NuGetConfections.Properties;
 using System.Reflection;
 using System.IO;
+using Action = NuGetConfections.Enums.Action;
+using ExitCode = NuGetConfections.Enums.ExitCode;
 
 namespace NuGetConfections.FunctionalTests
 {
     [TestFixture]
     public class NuGetConfectionsFTests
     {
-        private string _testDirectory, _uncosolidatedTestDataPath, _consolidatedTestDataPath, _nugetConfectionsPath;
+        private string _testDirectory, _uncosolidatedTestDataPath, _consolidatedTestDataPath, _nugetConfectionsPath, _noPackageReferencesPath;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
@@ -18,6 +20,7 @@ namespace NuGetConfections.FunctionalTests
             _testDirectory = GetTestDirectory();
             _uncosolidatedTestDataPath = Path.Combine(_testDirectory, "TestData\\Unconsolidated");
             _consolidatedTestDataPath = Path.Combine(_testDirectory, "TestData\\Consolidated");
+            _noPackageReferencesPath = Path.Combine(_testDirectory, "TestData\\NoPackageReferences");
             _nugetConfectionsPath = Path.Combine(_testDirectory, "NuGetConfections.exe");
         }
 
@@ -76,6 +79,15 @@ $@"NUnit 3.7.1, is referenced from: '{_testDirectory}\TestData\Unconsolidated\As
             Assert.AreEqual((int)ExitCode.PrintUsage, exitCode);
             Assert.AreEqual("", stdErr);
             Assert.AreEqual(Resources.Usage + Environment.NewLine, stdOut);
+        }
+
+        [Test]
+        public void NoPackageReferencesTest()
+        {
+            int exitCode = ExecuteNuGetConfections(Action.VerifyConsolidation.ToString(), _noPackageReferencesPath, out string stdErr, out string stdOut);
+            Assert.AreEqual((int)ExitCode.Success, exitCode);
+            Assert.AreEqual("", stdErr);
+            Assert.AreEqual(Resources.NoPackageReferencesFound + Environment.NewLine, stdOut);
         }
 
         private void AssertConsolidatedResult(int exitCode, string stdErr, string stdOut)

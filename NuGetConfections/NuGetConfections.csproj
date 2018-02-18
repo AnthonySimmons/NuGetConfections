@@ -79,16 +79,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Action.cs" />
-    <Compile Include="AssemblyDependencyInfo.cs" />
+    <Compile Include="Enums\Action.cs" />
+    <Compile Include="DependencyInfo\AssemblyDependencyInfo.cs" />
     <Compile Include="Commands\CommandFactory.cs" />
     <Compile Include="Commands\CommandOptions.cs" />
-    <Compile Include="ExitCodes.cs" />
+    <Compile Include="Enums\ExitCode.cs" />
     <Compile Include="Commands\INuGetConfectionCommand.cs" />
     <Compile Include="PackageConfig.cs" />
-    <Compile Include="PackageReference.cs" />
-    <Compile Include="PackageReferenceInfoForAssembly.cs" />
-    <Compile Include="PackageReferenceManager.cs" />
+    <Compile Include="PackageReferences\PackageReference.cs" />
+    <Compile Include="PackageReferences\PackageReferenceInfoForAssembly.cs" />
+    <Compile Include="PackageReferences\PackageReferenceManager.cs" />
     <Compile Include="PrintUsageException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -97,7 +97,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="RepositoryDependencyInfo.cs" />
+    <Compile Include="DependencyInfo\RepositoryDependencyInfo.cs" />
     <Compile Include="Commands\VerifyPackageConsolidationCommand.cs" />
   </ItemGroup>
   <ItemGroup>

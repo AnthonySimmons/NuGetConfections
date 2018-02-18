@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using NuGetConfections.Properties;
+using Action = NuGetConfections.Enums.Action;
 
 namespace NuGetConfections.Commands
 {
